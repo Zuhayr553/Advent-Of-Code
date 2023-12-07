@@ -17,19 +17,17 @@ class Day03 extends GenericDay {
     for (int i = 0; i < _input.length; i++) {
       RegExp numberPattern = RegExp(r'\d+');
       Iterable<Match> matches = numberPattern.allMatches(_input[i]);
-
       for (Match match in matches) {
-        int startIndex = match.start;
+        int startIndex =
+            match.start; // Adjust to get the index of the first digit
         int endIndex = match.end; // Adjust to get the index of the last digit
         String? number = match.group(0);
-
-        // Get previous and next elements
+        // Get Current Neighbours, Previous and Next
         String? previousElement = (i > 0) ? _input[i - 1] : null;
         String? nextElement = (i < _input.length - 1) ? _input[i + 1] : null;
         String _numberLeftAndRight = _input[i].substring(
             (startIndex - 1 >= 0) ? (startIndex - 1) : (startIndex),
             (endIndex + 1 < _input[i].length) ? (endIndex + 1) : (endIndex));
-
         String? _aboveTheNumber = previousElement?.substring(
             (startIndex - 1 >= 0) ? (startIndex - 1) : startIndex,
             (endIndex + 1 < previousElement.length)
@@ -43,12 +41,8 @@ class Day03 extends GenericDay {
             regExp.hasMatch(_numberLeftAndRight)) {
           _partNumbersList.add(int.parse(number!));
         }
-
-        // print("Previous Element: $previousElement");
-        // print("Next Element: $nextElement");
       }
     }
-
     return _partNumbersList.reduce((value, element) => value + element);
   }
 
