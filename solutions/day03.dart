@@ -1,3 +1,5 @@
+import 'package:test/test.dart';
+
 import '../utils/index.dart';
 
 class Day03 extends GenericDay {
@@ -8,14 +10,16 @@ class Day03 extends GenericDay {
     return input.getPerLine();
   }
 
+  RegExp numberPattern = RegExp(r'\d+');
+  RegExp asteriskRegExp = RegExp(r'\*');
   final regExp = RegExp(r'[^\d\w\s.]');
+
   @override
   int solvePart1() {
     List<int> _partNumbersList = [];
     List<String> _input = parseInput();
 
     for (int i = 0; i < _input.length; i++) {
-      RegExp numberPattern = RegExp(r'\d+');
       Iterable<Match> matches = numberPattern.allMatches(_input[i]);
       for (Match match in matches) {
         int startIndex =
